@@ -10,4 +10,4 @@ RUN apt-get update \
     && apt-get -y --no-install-recommends install  php-memcached php7.3-mysql php-redis php7.3-imap \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-#docker run --rm -v $(pwd):/app composer/composer install
+# chown -R www-data /application/src/storage /application/src/bootstrap/cache
