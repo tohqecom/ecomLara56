@@ -5,9 +5,8 @@ namespace Modules\Admin\Entities\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class Category extends Model
+class Product extends Model
 {
-    protected $table = 'categories';
     protected $fillable = [];
     protected $status = [
         1 => [
@@ -22,6 +21,6 @@ class Category extends Model
 
     public function getStatus()
     {
-        return Arr::get($this->status, $this->c_active, '[N\A]');
+        return Arr::get($this->status, $this->p_active, '[N\A]');
     }
 }

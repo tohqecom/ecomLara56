@@ -4,7 +4,7 @@ namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestCategory extends FormRequest
+class RequestProduct extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +14,8 @@ class RequestCategory extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:categories,c_name,' . $this->id,
-            'icon' => 'required'
+            'name' => 'required|unique:products,p_name,' . $this->id,
+            'category_id' => 'required'
         ];
     }
 
@@ -23,7 +23,7 @@ class RequestCategory extends FormRequest
         return [
             'name.required' => 'This input is requried!',
             'name.unique' => 'Category name is duplicated!',
-            'icon.required' => 'This input is requried!'
+            'category.required' => 'This input is requried!'
         ];
     }
 

@@ -5,11 +5,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Product</li>
                 </ol>
             </nav>
             <div class="col-sm-12">
-                <h2>Category list <a class="btn btn-primary" href="{{route('admin.get.create.category')}}">Add New Category</a> </h2>
+                <h2>Product list <a class="btn btn-primary" href="{{route('admin.get.create.product')}}">Add New Product</a> </h2>
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
@@ -21,16 +21,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if (isset($categories))
-                            @foreach($categories as $category)
+                        @if (isset($products))
+                            @foreach($products as $product)
                                 <tr>
-                                    <td>{{$category->id}}</td>
-                                    <td>{{$category->c_name}}</td>
-                                    <td>{{$category->c_title_seo}}</td>
-                                    <td>{{$category->getStatus()['name']}}</td>
+                                    <td>{{$product->id}}</td>
+                                    <td>{{$product->p_name}}</td>
+                                    <td>{{$product->p_title_seo}}</td>
+                                    <td>{{$product->getStatus()['name']}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.post.edit.category', $category->id) }}">Edit</a>
-                                        <a class="btn btn-danger btn-sm" href="{{ route('admin.post.action.category', ['delete', $category->id]) }}">Delete</a>
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.post.edit.product', $product->id) }}">Edit</a>
+                                        <a class="btn btn-danger btn-sm" href="{{ route('admin.post.action.product', ['delete', $product->id]) }}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

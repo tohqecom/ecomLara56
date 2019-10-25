@@ -5,12 +5,13 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Admin\Http\Requests\RequestCategory;
 use Modules\Admin\Entities\Models\Category;
+use Modules\Admin\Http\Requests\RequestProduct;
+use Modules\Admin\Entities\Models\Product;
 use Illuminate\Support\Str;
 use mysql_xdevapi\Expression;
 
-class AdminCategoryController extends Controller
+class AdminProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +19,11 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'c_name', 'c_active', 'c_title_seo')->paginate(10);
+        $categories = Product::select('id', 'p_name', 'p_active', 'p_title_seo')->paginate(10);
         $viewData = [
             'categories' => $categories
         ];
-        return view('admin::category.index', $viewData);
+        return view('admin::product.index', $viewData);
     }
 
     /**
@@ -31,15 +32,16 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin::category.create');
+        $categories = $this->getCategories();
+        return view('admin::product.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param RequestCategory $request
+     * @param RequestProduct $request
      * @return Response
      */
-    public function store(RequestCategory $request)
+    public function store(RequestProduct $request)
     {
         $this->createOrUpdate($request);
         return redirect()->back();
@@ -62,8 +64,13 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin::category.edit', compact('category'));
+        $product = Product::find($id);
+        return view('admin::product.edit', compact('product'));
+    }
+
+    public function getCategories()
+    {
+        return Category::all();
     }
 
     /**
@@ -72,7 +79,7 @@ class AdminCategoryController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(RequestCategory $request, $id)
+    public function update(RequestProduct $request, $id)
     {
         $this->createOrUpdate($request, $id);
         return redirect()->back();
@@ -82,16 +89,16 @@ class AdminCategoryController extends Controller
     {
         $code = 1;
         try {
-            $category = new Category();
+            $product = new Product();
             if (!empty($id)) {
-                $category = Category::find($id);
+                $product = Product::find($id);
             }
-            $category->c_name = $request->name;
-            $category->c_icon = Str::slug($request->icon);
-            $category->c_slug = Str::slug($request->name);
-            $category->c_title_seo = $request->meta_seo ? $request->meta_seo : $request->name;
-            $category->c_description_seo = $request->meta_descr;
-            $category->save();
+            $product->p_name = $request->name;
+            $product->c_icon = Str::slug($request->icon);
+            $product->p_slug = Str::slug($request->name);
+            $product->p_title_seo = $request->meta_seo ? $request->meta_seo : $request->name;
+            $product->p_description_seo = $request->meta_descr;
+            $product->save();
         } catch (\Exception $ex) {
             $code = 0;
         }
@@ -103,8 +110,8 @@ class AdminCategoryController extends Controller
         if ($action) {
             switch ($action) {
                 case 'delete':
-                    $category = Category::find($id);
-                    $category->delete();
+                    $product = Product::find($id);
+                    $product->delete();
                     break;
             }
         }
