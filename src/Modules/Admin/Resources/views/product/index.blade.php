@@ -9,13 +9,13 @@
                 </ol>
             </nav>
             <div class="col-sm-12">
-                <h2>Product list <a class="btn btn-primary" href="{{route('admin.get.create.product')}}">Add New Product</a> </h2>
+                <h2>Product list <a class="float-right " href="{{route('admin.get.create.product')}}"><i class="fa fa-plus-circle"></i></a> </h2>
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Title seo</th>
+                        <th>Product Name</th>
+                        <th>Category Name</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -26,8 +26,8 @@
                                 <tr>
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->p_name}}</td>
-                                    <td>{{$product->p_title_seo}}</td>
-                                    <td>{{$product->getStatus()['name']}}</td>
+                                    <td>{{$product->category->c_name}}</td>
+                                    <td><i class="{{$product->getStatus()['class']}}">{{$product->getStatus()['name']}}</i></td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.post.edit.product', $product->id) }}">Edit</a>
                                         <a class="btn btn-danger btn-sm" href="{{ route('admin.post.action.product', ['delete', $product->id]) }}">Delete</a>

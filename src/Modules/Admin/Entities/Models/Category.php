@@ -12,11 +12,11 @@ class Category extends Model
     protected $status = [
         1 => [
             'name' => 'Public',
-            'class' => ''
+            'class' => 'bg-success'
         ],
         0 => [
             'name' => 'Private',
-            'class' => ''
+            'class' => 'bg-default'
         ]
     ];
 
@@ -24,4 +24,9 @@ class Category extends Model
     {
         return Arr::get($this->status, $this->c_active, '[N\A]');
     }
+
+//    public function product()
+//    {
+//        return $this->belongsTo(Product::class);
+//    }
 }

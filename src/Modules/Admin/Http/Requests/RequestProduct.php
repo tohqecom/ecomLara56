@@ -14,16 +14,18 @@ class RequestProduct extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:products,p_name,' . $this->id,
-            'category_id' => 'required'
+            'name' => 'required|unique:products,p_name' . $this->id,
+            'content' => 'required',
+            'category_id' => 'required|not_in:0'
         ];
     }
 
     public function messages() {
         return [
             'name.required' => 'This input is requried!',
-            'name.unique' => 'Category name is duplicated!',
-            'category.required' => 'This input is requried!'
+            'name.unique' => 'Product name is duplicated!',
+            'content.required' => 'This input is requried!',
+            'category_id.required' => 'This input is requried!'
         ];
     }
 

@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Models\Category;
@@ -19,9 +19,9 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        $categories = Product::select('id', 'p_name', 'p_active', 'p_title_seo')->paginate(10);
+        $products = Product::with('category')->paginate(10);
         $viewData = [
-            'categories' => $categories
+            'products' => $products
         ];
         return view('admin::product.index', $viewData);
     }
@@ -44,7 +44,7 @@ class AdminProductController extends Controller
     public function store(RequestProduct $request)
     {
         $this->createOrUpdate($request);
-        return redirect()->back();
+//        return redirect()->back();
     }
 
     /**
@@ -75,7 +75,7 @@ class AdminProductController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
+     * @param RequestProduct $request
      * @param int $id
      * @return Response
      */
@@ -94,10 +94,16 @@ class AdminProductController extends Controller
                 $product = Product::find($id);
             }
             $product->p_name = $request->name;
-            $product->c_icon = Str::slug($request->icon);
+            $product->p_category_id = $request->category_id;
+            $product->p_descr = $request->description;
+            $product->p_content = $request->content;
+            $product->price = $request->price;
+            $product->p_discount = $request->discount;
+            $product->p_hot = $request->hot ? $request->hot : 0;
             $product->p_slug = Str::slug($request->name);
-            $product->p_title_seo = $request->meta_seo ? $request->meta_seo : $request->name;
-            $product->p_description_seo = $request->meta_descr;
+            $product->p_title_seo = $request->meta_title ? $request->meta_title : $request->name;
+            $product->p_descr_seo = $request->meta_descr;
+            $product->p_author_id = 1;
             $product->save();
         } catch (\Exception $ex) {
             $code = 0;

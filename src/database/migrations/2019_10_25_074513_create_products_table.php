@@ -21,13 +21,13 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('p_active')->default(0)->index();
             $table->tinyInteger('p_hot')->default(0);
             $table->string('p_thumb')->nullable();
-            $table->integer('p_category_id')->nullable(false);
+            $table->bigInteger('p_category_id')->nullable(false);
             $table->integer('p_discount')->nullable();
             $table->decimal('price')->nullable();
-            $table->string('p_tile_seo')->nullable();
+            $table->string('p_title_seo')->nullable();
             $table->string('p_descr_seo')->nullable();
             $table->string('p_slug')->nullable();
-            $table->string('p_author_id')->default(0)->index();
+            $table->bigInteger('p_author_id')->default(0)->index();
             $table->timestamps();
         });
     }

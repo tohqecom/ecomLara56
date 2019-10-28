@@ -9,7 +9,7 @@
                 </ol>
             </nav>
             <div class="col-sm-12">
-                <h2>Category list <a class="btn btn-primary" href="{{route('admin.get.create.category')}}">Add New Category</a> </h2>
+                <h2>Category list <a class="float-right" href="{{route('admin.get.create.category')}}"><i class="fa fa-plus-circle"></i></a> </h2>
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
@@ -27,7 +27,7 @@
                                     <td>{{$category->id}}</td>
                                     <td>{{$category->c_name}}</td>
                                     <td>{{$category->c_title_seo}}</td>
-                                    <td>{{$category->getStatus()['name']}}</td>
+                                    <td><i class="{{$category->getStatus()['class']}}">{{$category->getStatus()['name']}}</i></td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.post.edit.category', $category->id) }}">Edit</a>
                                         <a class="btn btn-danger btn-sm" href="{{ route('admin.post.action.category', ['delete', $category->id]) }}">Delete</a>

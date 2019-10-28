@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label for="descr">Description</label>
-                            <textarea rows="3" type="text" class="form-control" id="descr" placeholder="Enter Description" name="description" value="{{old('description')}}"></textarea>
+                            <textarea rows="3" type="text" class="form-control" id="descr" placeholder="Enter Description" name="description">{{old('description')}}</textarea>
                             <small class="form-text text-muted">
                                 @if($errors->has('description'))
                                     <div class="alert alert-danger">{{ $errors->first('description') }}</div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea rows="5" type="text" class="form-control" id="content" placeholder="Enter Content" name="content" value="{{old('content')}}"></textarea>
+                            <textarea rows="5" type="text" class="form-control" id="content" placeholder="Enter Content" name="content">{{old('content')}}</textarea>
                             <small class="form-text text-muted">
                                 @if($errors->has('content'))
                                     <div class="alert alert-danger">{{ $errors->first('content') }}</div>
@@ -64,7 +64,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select class="form-control" name="category" id="category">
+                            <select class="form-control" name="category_id" id="category">
                                 <option value="">--Please choose category--</option>
                                 @if (isset($categories))
                                     @foreach($categories as $category)
@@ -72,6 +72,11 @@
                                     @endforeach
                                 @endif
                             </select>
+                            <small class="form-text text-muted">
+                                @if($errors->has('category_id'))
+                                    <div class="alert alert-danger">{{ $errors->first('category_id') }}</div>
+                                @endif
+                            </small>
                         </div>
                         <div class="form-group">
                             <label for="price">Price</label>
@@ -83,8 +88,8 @@
                             </small>
                         </div>
                         <div class="form-group">
-                            <label for="price">Discount</label>
-                            <input type="text" class="form-control" id="price" placeholder="Enter % Discount" name="price" value="{{old('price')}}">
+                            <label for="discount">Discount</label>
+                            <input type="text" class="form-control" id="discount" placeholder="Enter % Discount" name="discount" value="{{old('discount')}}">
                             <small class="form-text text-muted">
                                 @if($errors->has('price'))
                                     <div class="alert alert-danger">{{ $errors->first('price') }}</div>
@@ -105,8 +110,6 @@
                             <label class="form-check-label" for="hot">Hot</label>
                         </div>
                     </div>
-
-
                     </div>
                 </form>
             </div>
