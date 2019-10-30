@@ -31369,7 +31369,8 @@ if (false) {} else {
 
 __webpack_require__(/*! ./bootstrap */ "./Resources/assets/js/bootstrap.js");
 
-__webpack_require__(/*! ./dashboard */ "./Resources/assets/js/dashboard.js");
+__webpack_require__(/*! ./dashboard */ "./Resources/assets/js/dashboard.js"); // require('./ckeditor/ckeditor');
+
 
 window.Vue = __webpack_require__(/*! vue */ "../../node_modules/vue/dist/vue.common.js");
 /**

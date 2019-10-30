@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('admin.get.list.transaction') }}">
               <span data-feather="file"></span>
               Orders
             </a>
@@ -53,7 +53,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('admin.get.list.user') }}">
               <span data-feather="users"></span>
               Customers
             </a>
@@ -110,7 +110,7 @@
     </div>
   </div>
 
-
+  @yield('script')
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -119,10 +119,10 @@
     <script src="../../assets/js/vendor/popper.min.js"></script>
 
     <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
+{{--    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>--}}
+{{--    <script>--}}
+{{--      feather.replace()--}}
+{{--    </script>--}}
 
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
@@ -155,5 +155,9 @@
         }
       });
     </script>
+  <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+  <script>
+      CKEDITOR.replace( 'content' );
+  </script>
   </body>
 </html>

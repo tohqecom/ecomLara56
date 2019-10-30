@@ -14,9 +14,10 @@ class RequestProduct extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:products,p_name' . $this->id,
+            'name' => 'required',
             'content' => 'required',
-            'category_id' => 'required|not_in:0'
+            'category_id' => 'required|not_in:0',
+            'thumb' => 'max:2048'//mimes:jpeg,jpg,png,gif|
         ];
     }
 
@@ -25,7 +26,9 @@ class RequestProduct extends FormRequest
             'name.required' => 'This input is requried!',
             'name.unique' => 'Product name is duplicated!',
             'content.required' => 'This input is requried!',
-            'category_id.required' => 'This input is requried!'
+            'category_id.required' => 'This input is requried!',
+            'thumb.image' => 'Please input image file!',
+            'thumb.max' => 'Please dont upload zise of image greater 2MB!'
         ];
     }
 

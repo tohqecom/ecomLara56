@@ -44,7 +44,7 @@ class AdminProductController extends Controller
     public function store(RequestProduct $request)
     {
         $this->createOrUpdate($request);
-//        return redirect()->back();
+        return redirect()->back();
     }
 
     /**
@@ -65,7 +65,8 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('admin::product.edit', compact('product'));
+        $categories = $this->getCategories();
+        return view('admin::product.edit', compact('product', 'categories'));
     }
 
     public function getCategories()
@@ -104,6 +105,12 @@ class AdminProductController extends Controller
             $product->p_title_seo = $request->meta_title ? $request->meta_title : $request->name;
             $product->p_descr_seo = $request->meta_descr;
             $product->p_author_id = 1;
+            if (!empty($request->hasFile('thumb'))) {
+                $thumb = $request->file('thumb');
+                $newName = time() . '_' . rand() . '.' . $thumb->getClientOriginalExtension();
+                $thumb->move(public_path('images'), $newName);
+                $product->p_thumb = $newName;
+            }
             $product->save();
         } catch (\Exception $ex) {
             $code = 0;
