@@ -16,6 +16,7 @@
                         <th>#</th>
                         <th>Product Name</th>
                         <th>Category Name</th>
+                        <th>Image</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -27,6 +28,7 @@
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->p_name}}</td>
                                     <td>{{$product->category->c_name}}</td>
+                                    <td><img width="45px" src="{{ (strpos($product->p_thumb, 'https:') !== false) ? $product->p_thumb : asset('images/' . $product->p_thumb) }}" alt="{{$product->p_name}}"/></td>
                                     <td><i class="{{$product->getStatus()['class']}}">{{$product->getStatus()['name']}}</i></td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.post.edit.product', $product->id) }}">Edit</a>

@@ -6,26 +6,37 @@
             </div>
             <div class="col-md-3 clearfix">
                 <ul class="login-cart">
-                    <li>
-                        <a data-toggle="modal" data-target="#myModal" href="{{ route('get.loadinup') }}">
-                            <i class="fa fa-user"></i>
-                            Login
-                        </a>
-                    </li>
+                    @if (Auth::check())
+                        <li>
+                            <a href="{{ route('get.logout.user') }}">
+                                <i class="fa fa-user"></i>
+                                Logout
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a data-toggle="modal" data-target="#myModal" href="{{ route('get.loadinup') }}">
+                                <i class="fa fa-user"></i>
+                                Login
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <div class="cart dropdown">
-                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart(1)</a>
+                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>{{Cart::count()}}</a>
                             <div class="dropdown-menu dropup">
                                 <span class="caret"></span>
                                 <ul class="media-list">
-                                    <li class="media">
-                                        <img class="pull-left" src="images/product-item.jpg" alt="">
-                                        <div class="media-body">
-                                            <h6>Italian Sauce
-                                                <span>$250</span>
-                                            </h6>
-                                        </div>
-                                    </li>
+                                    @foreach(Cart::content() as $item)
+                                        <li class="media">
+                                            <img width="45px" class="pull-left" src="{{ $item->thumb }}" alt="">
+                                            <div class="media-body">
+                                                <h6>{{ $item->name }}
+                                                    <span>${{ $item->price }}</span>
+                                                </h6>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <button class="btn btn-primary btn-sm">Checkout</button>
                             </div>

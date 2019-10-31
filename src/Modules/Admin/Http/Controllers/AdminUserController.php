@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -14,7 +15,8 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        return view('admin::user.index');
+        $users = User::all();
+        return view('admin::user.index', compact('users'));
     }
 
     /**

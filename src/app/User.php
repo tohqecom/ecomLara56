@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Arr;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $status = [
+        1 => [
+            'name' => 'Public',
+            'class' => 'bg-success'
+        ],
+        0 => [
+            'name' => 'Private',
+            'class' => 'bg-default'
+        ]
+    ];
+
+    public function getStatus()
+    {
+//        dump($this->active);
+        return Arr::get($this->status, $this->active, '[N\A]');
+    }
 }

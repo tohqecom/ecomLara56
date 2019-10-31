@@ -39,7 +39,14 @@
                             <h4>{{$product->p_name}}</h4>
                             <p class="price">${{$product->price}}</p>
                             <p>{{$product->p_descr}}</p>
-                            <a class="view-link" href="#"><i class="fa fa-plus-circle"></i>Add To Cart</a>
+{{--                            <a class="view-link" href="#">--}}
+                            <form method="POST" action="{{route('cart.add')}}" class="form-inline my-2 my-lg-0" >
+                                @csrf
+                                <input name="id" type="hidden" value="{{$product->id}}">
+                                <button class="btn btn-success btn-block" type="submit">Add to cart</button>
+                            </form>
+{{--                                <i class="fa fa-plus-circle"></i>Add To Cart--}}
+{{--                            </a>--}}
                         </div>	<!-- End of /.product-des -->
                     </div> <!-- End of /.block -->
                 </div>	<!-- End of /.col-md-4 -->
